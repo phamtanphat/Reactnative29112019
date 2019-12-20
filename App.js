@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 
 class App extends Component {
   render() {
     return (
-      <SafeAreaView style={{flex: 1, flexDirection: 'column'}}>
+      <SafeAreaView style={styles.container}>
         <View
           style={{
             flex: 1,
@@ -28,4 +28,10 @@ class App extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+});
 export default App;
