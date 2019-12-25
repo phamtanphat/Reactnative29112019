@@ -3,6 +3,21 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
 export default class MyState extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+  increase() {
+    this.setState({count: this.state.count + 1});
+  }
+  decrease() {
+    this.setState({count: this.state.count - 1});
+  }
+  reset() {
+    this.setState({count: 0});
+  }
   render() {
     return (
       <View
@@ -13,7 +28,7 @@ export default class MyState extends Component {
           alignItems: 'center',
         }}>
         <Text style={{color: 'red', fontSize: 40}}>
-          Count : {this.props.count}
+          Count : {this.state.count}
         </Text>
         <View
           style={{
@@ -21,19 +36,25 @@ export default class MyState extends Component {
             flexDirection: 'row',
             justifyContent: 'space-evenly',
           }}>
-          <TouchableOpacity style={{backgroundColor: 'green', padding: 10}}>
+          <TouchableOpacity
+            onPress={() => this.increase()}
+            style={{backgroundColor: 'green', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Increase
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'red', padding: 10}}>
+          <TouchableOpacity
+            onPress={() => this.decrease()}
+            style={{backgroundColor: 'red', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Decrease
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor: 'slategray', padding: 10}}>
+          <TouchableOpacity
+            onPress={() => this.reset()}
+            style={{backgroundColor: 'slategray', padding: 10}}>
             <Text
               style={{color: 'white', fontStyle: 'italic', fontWeight: 'bold'}}>
               Reset
