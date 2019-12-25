@@ -3,6 +3,8 @@ import {View, Text, SafeAreaView} from 'react-native';
 import TextView from './src/TextView';
 import Word from './src/Word';
 import {width, height} from './src/dimension';
+import MyFlatlist from './src/MyFlatlist';
+import MyState from './src/MyState';
 
 const words = [
   {id: 1, en: 'One', vn: 'Mot', isMemorized: true},
@@ -16,9 +18,10 @@ class App extends Component {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={{flex: 1, marginHorizontal: width / 20}}>
-          {words.map(item => {
+          {/* {words.map(item => {
             return <Word word={item} key={item.id} />;
-          })}
+          })} */}
+          <MyState />
         </View>
       </SafeAreaView>
     );
