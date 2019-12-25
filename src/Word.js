@@ -33,11 +33,13 @@ export default class Word extends Component {
           }}>
           <TouchableOpacity
             style={{
-              backgroundColor: '#208837',
+              backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
               paddingVertical: width / 40,
             }}>
-            <Text style={{color: 'white', fontSize: width / 20}}>Forgot</Text>
+            <Text style={{color: 'white', fontSize: width / 20}}>
+              {isMemorized ? 'Forgot' : 'isMemorized'}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
