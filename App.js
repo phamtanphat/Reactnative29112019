@@ -21,7 +21,7 @@ class App extends Component {
           {/* {words.map(item => {
             return <Word word={item} key={item.id} />;
           })} */}
-          <MyState />
+          <MyFlatlist />
         </View>
       </SafeAreaView>
     );
