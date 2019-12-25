@@ -11,23 +11,14 @@ const words = [
   {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
   {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
 ];
-const name = ['Teo', 'Ti', 'Tun'];
 class App extends Component {
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={{flex: 1, marginHorizontal: width / 20}}>
           {words.map(item => {
-            return <Word en={item.en} vn={item.vn} key={item.id} />;
+            return <Word word={item} key={item.id} />;
           })}
-          {/* {[
-            <TextView en={name[0]} />,
-            <TextView en={name[1]} />,
-            <TextView en={name[2]} />,
-          ]}
-          {name.map(item => {
-            return <TextView en={item} />
-          })} */}
         </View>
       </SafeAreaView>
     );

@@ -1,27 +1,53 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {width , height} from './dimension';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {width, height} from './dimension';
 
 export default class Word extends Component {
   render() {
-    //Task1 : ve ra 2 button
-        // +Remove : mac dinh setup ve giao dien
-        // +Forgot or Memorized : isMemorized = true (Forgot va nen xanh la) nguoc lai
-    // Task2 : isMemorized = true hien thi vn = ---- va nguoc lai
-    const {en, vn} = this.props;
+    const {en, vn, isMemorized} = this.props.word;
     return (
       <View
         style={{
-          width: '100%',
-          flexDirection: 'row',
-          backgroundColor: 'lightgrey',
-          justifyContent: 'space-around',
           marginBottom: width / 20,
           borderRadius: 5,
+          backgroundColor: 'lightgrey',
         }}>
-        <Text style={{fontSize: width / 10, color: '#27A745'}}>{en}</Text>
-        <Text style={{fontSize: width / 10, color: '#DC3545'}}>{vn}</Text>
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+          <Text style={{fontSize: width / 13, color: '#27A745'}}>{en}</Text>
+          <Text style={{fontSize: width / 13, color: '#DC3545'}}>
+            {isMemorized ? '----' : vn}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            marginTop: width / 80,
+            marginBottom: width / 30,
+          }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#208837',
+              paddingHorizontal: width / 15,
+              paddingVertical: width / 40,
+            }}>
+            <Text style={{color: 'white', fontSize: width / 20}}>Forgot</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#e0a800',
+              paddingHorizontal: width / 15,
+              paddingVertical: width / 40,
+            }}>
+            <Text style={{color: 'black', fontSize: width / 20}}>Remove</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
