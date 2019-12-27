@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {Text, View, FlatList, Image} from 'react-native';
+import {Text, View, FlatList, Image, TouchableOpacity} from 'react-native';
 import Monan from './model/Monan';
 
 export default class MyFlatlist extends Component {
@@ -18,9 +18,16 @@ export default class MyFlatlist extends Component {
     };
   }
   renderItemList = (item) =>{
-    console.log(item);
     return (
-      <View style={{flex: 1, flexDirection : 'row', marginVertical: 5}}>
+      <TouchableOpacity
+        onPress={() => {
+          const newArray = this.state.listMonan.filter( monan => {
+            return monan.id != item.id;
+          });
+          this.setState({listMonan : newArray});
+        }}
+      >
+        <View style={{flex: 1, flexDirection : 'row', marginVertical: 5}}>
           <Image
             source={item.image}
             style={{width : 120 , height : 100}}/>
@@ -40,6 +47,7 @@ export default class MyFlatlist extends Component {
             </Text>
           </View>
       </View>
+      </TouchableOpacity>
     );
   }
   render() {
