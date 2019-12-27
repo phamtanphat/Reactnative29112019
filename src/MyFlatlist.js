@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {Text, View, FlatList, Image} from 'react-native';
@@ -17,25 +18,44 @@ export default class MyFlatlist extends Component {
     };
   }
   renderItemList = (item) =>{
+    console.log(item);
     return (
-      <View style={{ flexDirection : 'row'}}>
-          <Image source={item.image} style={{width : 120 , height : 100}}/>
-          <View style={{flexDirection : 'column' , justifyContent : 'space-around'}}>
-            <Text style={{color : 'red' , fontSize : 20 , fontWeight : 'bold'}}>{item.name}</Text>
-            <Text style={{color : 'blue' , fontSize : 15 }}>{item.description}</Text>
-            <Text style={{color : 'black' , fontSize : 15 }}>{item.price} VND</Text>
+      <View style={{flex: 1, flexDirection : 'row', marginVertical: 5}}>
+          <Image
+            source={item.image}
+            style={{width : 120 , height : 100}}/>
+          <View
+            style={{flexDirection : 'column' , justifyContent : 'space-around'}}>
+            <Text
+              style={{color : 'red' , fontSize : 20 , fontWeight : 'bold'}}>
+              {item.name}
+            </Text>
+            <Text
+              style={{color : 'blue' , fontSize : 15 }}>
+              {item.description}
+            </Text>
+            <Text
+              style={{color : 'black' , fontSize : 15 }}>
+              {item.price} VND
+            </Text>
           </View>
       </View>
     );
   }
   render() {
     return (
-      <View>
+      <View style={{flex : 1}}>
         <FlatList
           data={this.state.listMonan}
           extraData={this.state}
           keyExtractor={(item,index) => item.id + ''}
           renderItem={({item,index}) => this.renderItemList(item)}
+          ItemSeparatorComponent={() => {
+            return (
+              <View
+                style={{width : '100%' , height: 2 , backgroundColor : 'black'}}/>
+            );
+          }}
         />
       </View>
     );
