@@ -101,6 +101,21 @@ export default class MyFlatlist extends Component {
               marginTop: 20,
             }}>
             <TouchableOpacity
+              onPress={() => {
+                const {txtTenmonan ,txtGiamonan} = this.state;
+                if(txtTenmonan.length <= 0 || txtGiamonan.length <= 0){
+                  return alert("Ban chua nhap du thong tin")
+                }
+                const newFood =  new Monan(
+                  this.state.listMonan[this.state.listMonan.length - 1].id + 1,
+                  txtTenmonan,
+                  "Mo ta mon an",
+                  txtGiamonan,
+                  require('./asset/sup.jpg')
+                );
+                const newListMonan = this.state.listMonan.concat(newFood);
+                this.setState({listMonan : newListMonan});
+              }}
               style={{
                 backgroundColor: '#28a745',
                 padding: 15,
