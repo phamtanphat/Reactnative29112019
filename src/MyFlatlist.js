@@ -18,6 +18,8 @@ export default class MyFlatlist extends Component {
         new Monan(5, 'Sup', 'Cong thuc gia truyen', 12000,require('./asset/sup.jpg')),
       ],
       shouldShowForm: false,
+      txtGiamonan: '',
+      txtTenmonan: '',
     };
   }
   renderItemList = (item) =>{
@@ -71,6 +73,10 @@ export default class MyFlatlist extends Component {
               paddingHorizontal: 20,
             }}
             placeholder="Ten mon an"
+            value={this.state.txtTenmonan}
+            onChangeText={text => {
+                this.setState({txtTenmonan : text});
+            }}
           />
           <TextInput
             style={{
@@ -81,9 +87,12 @@ export default class MyFlatlist extends Component {
               fontSize: 20,
               paddingHorizontal: 20,
             }}
-            secureTextEntry={true}
             keyboardType="number-pad"
             placeholder="Gia mon an"
+            value={this.state.txtGiamonan}
+            onChangeText={text => {
+                this.setState({txtGiamonan : text});
+            }}
           />
           <View
             style={{
