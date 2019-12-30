@@ -57,8 +57,7 @@ export default class MyFlatlist extends Component {
     const {shouldShowForm} = this.state;
     if (shouldShowForm) {
       return (
-        <KeyboardAwareScrollView 
-          behavior="padding">
+        <KeyboardAwareScrollView >
           <TextInput
             style={{
               height: 50,
@@ -134,20 +133,20 @@ export default class MyFlatlist extends Component {
   render() {
     return (
       <View style={{flex : 1}}>
+        <View style={{marginBottom : 10}}>{this.renderForm()}</View>
         <FlatList
-          data={this.state.listMonan}
-          showsVerticalScrollIndicator={false}
-          extraData={this.state}
-          ListHeaderComponent={() => this.renderForm()}
-          keyExtractor={(item,index) => item.id + ''}
-          renderItem={({item,index}) => this.renderItemList(item)}
-          ItemSeparatorComponent={() => {
-            return (
-              <View
-                style={{width : '100%' , height: 2 , backgroundColor : 'black'}}/>
-            );
-          }}
-        />
+            data={this.state.listMonan}
+            showsVerticalScrollIndicator={false}
+            extraData={this.state}
+            keyExtractor={(item,index) => item.id + ''}
+            renderItem={({item,index}) => this.renderItemList(item)}
+            ItemSeparatorComponent={() => {
+              return (
+                <View
+                  style={{width : '100%' , height: 2 , backgroundColor : 'black'}}/>
+              );
+            }}
+          />
       </View>
     );
   }
