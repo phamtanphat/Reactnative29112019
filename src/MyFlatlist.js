@@ -114,7 +114,14 @@ export default class MyFlatlist extends Component {
                   require('./asset/sup.jpg')
                 );
                 const newListMonan = this.state.listMonan.concat(newFood);
-                this.setState({listMonan : newListMonan});
+                newListMonan.sort((a,b) => a.name > b.name);
+                this.setState({
+                  listMonan : newListMonan,
+                  txtGiamonan: '',
+                  txtTenmonan: '',
+                  shouldShowForm: !this.state.shouldShowForm,
+                });
+                this.scrollToEnd();
               }}
               style={{
                 backgroundColor: '#28a745',
@@ -160,13 +167,21 @@ export default class MyFlatlist extends Component {
       );
     }
   }
+  scrollToEnd = () => {
+    const wait = new Promise((resolve) => setTimeout(resolve, 0));
+    wait.then( () => {
+        this.flatList.scrollToEnd({ animated: true });
+    });
+  }
   render() {
     return (
       <KeyboardAvoidingView style={{flex: 1}}>
         <View style={{flex : 1}}>
           <View style={{marginBottom : 10}}>{this.renderForm()}</View>
           <FlatList
+              ref={ (ref) => { this.flatList = ref; }}
               data={this.state.listMonan}
+              scrolltoEnd
               showsVerticalScrollIndicator={false}
               extraData={this.state}
               keyExtractor={(item,index) => item.id + ''}
