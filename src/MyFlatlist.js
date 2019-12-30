@@ -53,6 +53,9 @@ export default class MyFlatlist extends Component {
       </TouchableOpacity>
     );
   }
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  }
   renderForm() {
     const {shouldShowForm} = this.state;
     if (shouldShowForm) {
@@ -87,7 +90,6 @@ export default class MyFlatlist extends Component {
               marginTop: 20,
             }}>
             <TouchableOpacity
-              onPress={() => this.addWord()}
               style={{
                 backgroundColor: '#28a745',
                 padding: 15,
@@ -98,6 +100,7 @@ export default class MyFlatlist extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() =>this.toggleForm()}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -113,6 +116,7 @@ export default class MyFlatlist extends Component {
     } else {
       return (
         <TouchableOpacity
+          onPress={() =>this.toggleForm()}
           style={{
             paddingVertical: width / 30,
             backgroundColor: '#28a745',
