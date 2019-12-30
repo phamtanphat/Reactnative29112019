@@ -17,7 +17,7 @@ export default class MyFlatlist extends Component {
         new Monan(4, 'Muc don thit', 'Dac san que huong', 15000,require('./asset/mucdonthit.jpg')),
         new Monan(5, 'Sup', 'Cong thuc gia truyen', 12000,require('./asset/sup.jpg')),
       ],
-      shouldShowForm: true,
+      shouldShowForm: false,
     };
   }
   renderItemList = (item) =>{
@@ -70,7 +70,7 @@ export default class MyFlatlist extends Component {
               fontSize: 20,
               paddingHorizontal: 20,
             }}
-            placeholder="English"
+            placeholder="Ten mon an"
           />
           <TextInput
             style={{
@@ -81,7 +81,9 @@ export default class MyFlatlist extends Component {
               fontSize: 20,
               paddingHorizontal: 20,
             }}
-            placeholder="Vietnamese"
+            secureTextEntry={true}
+            keyboardType="number-pad"
+            placeholder="Gia mon an"
           />
           <View
             style={{
@@ -96,7 +98,7 @@ export default class MyFlatlist extends Component {
                 borderRadius: 8,
               }}>
               <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-                Add word
+                Add Food
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
