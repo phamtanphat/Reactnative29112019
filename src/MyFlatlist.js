@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {Text, View, FlatList, Image, TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native';
+import {Text, View, FlatList, Image, TouchableOpacity, TextInput} from 'react-native';
 import Monan from './model/Monan';
 import {width , height} from './dimension';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class MyFlatlist extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class MyFlatlist extends Component {
     const {shouldShowForm} = this.state;
     if (shouldShowForm) {
       return (
-        <KeyboardAvoidingView 
+        <KeyboardAwareScrollView 
           behavior="padding">
           <TextInput
             style={{
@@ -108,7 +109,7 @@ export default class MyFlatlist extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       );
     } else {
       return (
@@ -135,6 +136,7 @@ export default class MyFlatlist extends Component {
       <View style={{flex : 1}}>
         <FlatList
           data={this.state.listMonan}
+          showsVerticalScrollIndicator={false}
           extraData={this.state}
           ListHeaderComponent={() => this.renderForm()}
           keyExtractor={(item,index) => item.id + ''}
