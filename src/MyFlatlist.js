@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {Text, View, FlatList, Image, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, FlatList, Image, TouchableOpacity,KeyboardAvoidingView, TextInput} from 'react-native';
 import Monan from './model/Monan';
 import {width , height} from './dimension';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -57,7 +57,7 @@ export default class MyFlatlist extends Component {
     const {shouldShowForm} = this.state;
     if (shouldShowForm) {
       return (
-        <KeyboardAwareScrollView >
+        <View >
           <TextInput
             style={{
               height: 50,
@@ -108,7 +108,7 @@ export default class MyFlatlist extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAwareScrollView>
+        </View>
       );
     } else {
       return (
@@ -132,22 +132,24 @@ export default class MyFlatlist extends Component {
   }
   render() {
     return (
-      <View style={{flex : 1}}>
-        <View style={{marginBottom : 10}}>{this.renderForm()}</View>
-        <FlatList
-            data={this.state.listMonan}
-            showsVerticalScrollIndicator={false}
-            extraData={this.state}
-            keyExtractor={(item,index) => item.id + ''}
-            renderItem={({item,index}) => this.renderItemList(item)}
-            ItemSeparatorComponent={() => {
-              return (
-                <View
-                  style={{width : '100%' , height: 2 , backgroundColor : 'black'}}/>
-              );
-            }}
-          />
-      </View>
+      <KeyboardAvoidingView style={{flex: 1}}>
+        <View style={{flex : 1}}>
+          <View style={{marginBottom : 10}}>{this.renderForm()}</View>
+          <FlatList
+              data={this.state.listMonan}
+              showsVerticalScrollIndicator={false}
+              extraData={this.state}
+              keyExtractor={(item,index) => item.id + ''}
+              renderItem={({item,index}) => this.renderItemList(item)}
+              ItemSeparatorComponent={() => {
+                return (
+                  <View
+                    style={{width : '100%' , height: 2 , backgroundColor : 'black'}}/>
+                );
+              }}
+            />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
