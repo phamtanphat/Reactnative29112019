@@ -6,6 +6,7 @@ import {width, height} from './src/dimension';
 import MyFlatlist from './src/MyFlatlist';
 import MyState from './src/MyState';
 import List from './src/List';
+import Mymodal from './src/Mymodal';
 
 class App extends Component {
   render() {
@@ -17,7 +18,8 @@ class App extends Component {
           })} */}
           {/* <List />
           <MyFlatlist /> */}
-          <List />
+          {/* <List /> */}
+          <Mymodal />
         </View>
       </SafeAreaView>
     );
