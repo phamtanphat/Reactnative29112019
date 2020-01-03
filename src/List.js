@@ -16,6 +16,15 @@ export default class List extends Component {
       ],
     };
   }
+  toggleMemorized = id => {
+    const words = this.state.words.map(word => {
+      if (word.id === id) {
+        return {...word, isMemorized: !word.isMemorized};
+      }
+      return word;
+    });
+    this.setState({words});
+  };
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
     return (
@@ -44,6 +53,7 @@ export default class List extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
+            onPress={() => this.toggleMemorized(id)}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
