@@ -25,6 +25,15 @@ export default class List extends Component {
     });
     this.setState({words});
   };
+  removeWord = id => {
+    const words = this.state.words.filter(word => {
+      if (word.id === id) {
+        return false;
+      }
+      return true;
+    });
+    this.setState({words});
+  };
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
     return (
@@ -64,6 +73,7 @@ export default class List extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => this.removeWord(id)}
             style={{
               backgroundColor: '#e0a800',
               paddingHorizontal: width / 15,
