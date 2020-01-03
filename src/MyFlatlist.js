@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import {Text, View, FlatList, Image, TouchableOpacity,KeyboardAvoidingView, TextInput} from 'react-native';
 import Monan from './model/Monan';
 import {width , height} from './dimension';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class MyFlatlist extends Component {
   constructor(props) {

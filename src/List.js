@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Text, View, FlatList, TouchableOpacity, TextInput} from 'react-native';
 import {width, height} from './dimension';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';;
 
 export default class List extends Component {
   constructor(props) {
@@ -165,17 +166,21 @@ export default class List extends Component {
   };
   render() {
     return (
-      <View style={{flex: 1, paddingTop: width / 50}}>
-        {this.renderForm()}
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{marginTop: width / 50}}
-          data={this.state.words}
-          extraData={this.state}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item, index}) => this.renderItemView(item)}
-        />
-      </View>
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        style={{flex: 1}}>
+        <View style={{flex: 1, paddingTop: width / 50}}>
+          {this.renderForm()}
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{marginTop: width / 50}}
+            data={this.state.words}
+            extraData={this.state}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item, index}) => this.renderItemView(item)}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
