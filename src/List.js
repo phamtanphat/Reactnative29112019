@@ -1,9 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, FlatList, TouchableOpacity, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from 'react-native';
 import {width, height} from './dimension';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';;
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 export default class List extends Component {
   constructor(props) {
     super(props);
@@ -105,13 +111,26 @@ export default class List extends Component {
     this.setState({words});
   };
   removeWord = id => {
-    const words = this.state.words.filter(word => {
-      if (word.id === id) {
-        return false;
-      }
-      return true;
-    });
-    this.setState({words});
+    Alert.alert(
+      'Do you want to remove this word ?',
+      'Choose yes or no',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            const words = this.state.words.filter(word => {
+              if (word.id === id) {
+                return false;
+              }
+              return true;
+            });
+            this.setState({words});
+          },
+        },
+        {text: 'No', style: 'cancel'},
+      ],
+      {cancelable: false},
+    );
   };
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
