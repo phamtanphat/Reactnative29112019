@@ -5,14 +5,8 @@ import Word from './src/Word';
 import {width, height} from './src/dimension';
 import MyFlatlist from './src/MyFlatlist';
 import MyState from './src/MyState';
+import List from './src/List';
 
-const words = [
-  {id: 1, en: 'One', vn: 'Mot', isMemorized: true},
-  {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-  {id: 3, en: 'Three', vn: 'Ba', isMemorized: false},
-  {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
-  {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
-];
 class App extends Component {
   render() {
     return (
@@ -21,7 +15,9 @@ class App extends Component {
           {/* {words.map(item => {
             return <Word word={item} key={item.id} />;
           })} */}
-          <MyFlatlist />
+          {/* <List />
+          <MyFlatlist /> */}
+          <List />
         </View>
       </SafeAreaView>
     );
