@@ -7,6 +7,7 @@ import MyFlatlist from './src/MyFlatlist';
 import MyState from './src/MyState';
 import List from './src/List';
 import Mymodal from './src/Mymodal';
+import Box from './src/Box';
 
 class App extends Component {
   render() {
@@ -18,8 +19,9 @@ class App extends Component {
           })} */}
           {/* <List />
           <MyFlatlist /> */}
-          <List />
+          {/* <List /> */}
           {/* <Mymodal /> */}
+          <Box />
         </View>
       </SafeAreaView>
     );
