@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {width, height} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 export default class List extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +22,12 @@ export default class List extends Component {
         {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
       ],
-      shouldShowForm: true,
+      shouldShowForm: false,
     };
   }
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
   renderForm() {
     const {shouldShowForm} = this.state;
     if (shouldShowForm) {
@@ -69,6 +73,7 @@ export default class List extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => this.toggleForm()}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -84,6 +89,7 @@ export default class List extends Component {
     } else {
       return (
         <TouchableOpacity
+          onPress={() => this.toggleForm()}
           style={{
             paddingVertical: width / 30,
             backgroundColor: '#28a745',

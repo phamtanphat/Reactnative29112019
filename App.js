@@ -18,8 +18,8 @@ class App extends Component {
           })} */}
           {/* <List />
           <MyFlatlist /> */}
-          {/* <List /> */}
-          <Mymodal />
+          <List />
+          {/* <Mymodal /> */}
         </View>
       </SafeAreaView>
     );
