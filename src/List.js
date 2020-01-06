@@ -86,7 +86,6 @@ export default class List extends Component {
               fontSize: 20,
               paddingHorizontal: 20,
             }}
-            keyboardType="number-pad"
             placeholder="Vietnamese"
             value={this.state.txtVn}
             onChangeText={text => {
