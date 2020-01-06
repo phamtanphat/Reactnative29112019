@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {width, height} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import WordModel from './model/WordModel';
 
 export default class List extends Component {
   constructor(props) {
@@ -23,10 +24,31 @@ export default class List extends Component {
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
       ],
       shouldShowForm: false,
+      txtEn: '',
+      txtVn: '',
     };
   }
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Ban chua nhap du thong tin');
+    }
+    const newWord = new WordModel(
+      this.state.words[this.state.words.length - 1].id + 1,
+      txtEn,
+      txtVn,
+    );
+    const newListWord = this.state.words.concat(newWord);
+    newListWord.sort((a, b) => a.name > b.name);
+    this.setState({
+      words: newListWord,
+      txtEn: '',
+      txtVn: '',
+      shouldShowForm: !this.state.shouldShowForm,
+    });
   };
   renderForm() {
     const {shouldShowForm} = this.state;
@@ -43,6 +65,10 @@ export default class List extends Component {
               paddingHorizontal: 20,
             }}
             placeholder="English"
+            value={this.state.txtEn}
+            onChangeText={text => {
+              this.setState({txtEn: text});
+            }}
           />
           <TextInput
             style={{
@@ -55,6 +81,10 @@ export default class List extends Component {
             }}
             keyboardType="number-pad"
             placeholder="Vietnamese"
+            value={this.state.txtVn}
+            onChangeText={text => {
+              this.setState({txtVn: text});
+            }}
           />
           <View
             style={{
@@ -63,6 +93,7 @@ export default class List extends Component {
               marginTop: 20,
             }}>
             <TouchableOpacity
+              onPress={() => this.addWord()}
               style={{
                 backgroundColor: '#28a745',
                 padding: 15,
@@ -197,6 +228,9 @@ export default class List extends Component {
         <View style={{flex: 1, paddingTop: width / 50}}>
           {this.renderForm()}
           <FlatList
+            ref={ref => {
+              this.flatList = ref;
+            }}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{marginTop: width / 50}}
             data={this.state.words}
