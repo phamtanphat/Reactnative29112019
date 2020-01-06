@@ -178,6 +178,13 @@ export default class List extends Component {
   };
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
+    const {optionSelected} = this.state;
+    if (optionSelected === 'SHOW_FORGOT' && !item.isMemorized) {
+      return null;
+    }
+    if (optionSelected === 'SHOW_MEMORIZED' && item.isMemorized) {
+      return null;
+    }
     return (
       <View
         style={{
@@ -247,6 +254,9 @@ export default class List extends Component {
             inputContainerStyle={{borderBottomColor: 'transparent'}}
             dropdownOffset={{top: width * 0.01, left: 0}}
             value={this.state.optionSelected}
+            onChangeText={text => {
+              this.setState({optionSelected: text});
+            }}
           />
           <FlatList
             ref={ref => {
