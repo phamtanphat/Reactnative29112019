@@ -11,6 +11,7 @@ import {
 import {width, height} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import WordModel from './model/WordModel';
+import {Dropdown} from 'react-native-material-dropdown';
 
 export default class List extends Component {
   constructor(props) {
@@ -26,6 +27,12 @@ export default class List extends Component {
       shouldShowForm: false,
       txtEn: '',
       txtVn: '',
+      optionWord: [
+        {value: 'SHOW_ALL'},
+        {value: 'SHOW_FORGOT'},
+        {value: 'SHOW_MEMORIZED'},
+      ],
+      optionSelected: 'SHOW_ALL',
     };
   }
   toggleForm = () => {
@@ -227,6 +234,20 @@ export default class List extends Component {
         style={{flex: 1}}>
         <View style={{flex: 1, paddingTop: width / 50}}>
           {this.renderForm()}
+          <Dropdown
+            data={this.state.optionWord}
+            containerStyle={{
+              top: width * 0.01,
+              width: width * 0.9,
+              height: width * 0.1,
+              borderRadius: 5,
+              borderWidth: 1,
+              paddingLeft: width * 0.02,
+            }}
+            inputContainerStyle={{borderBottomColor: 'transparent'}}
+            dropdownOffset={{top: width * 0.01, left: 0}}
+            value={this.state.optionSelected}
+          />
           <FlatList
             ref={ref => {
               this.flatList = ref;
