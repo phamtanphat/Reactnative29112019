@@ -13,7 +13,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import WordModel from './model/WordModel';
 import Word from './Word';
 import Filter from './Filter';
-
+import Form from './Form';
 
 export default class List extends Component {
   constructor(props) {
@@ -27,9 +27,7 @@ export default class List extends Component {
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
       ],
       shouldShowForm: false,
-      txtEn: '',
-      txtVn: '',
-      optionSelected: 'SHOW_FORGOT',
+      optionSelected: 'SHOW_ALL',
     };
   }
   toggleForm = () => {
@@ -54,93 +52,7 @@ export default class List extends Component {
       shouldShowForm: !this.state.shouldShowForm,
     });
   };
-  renderForm() {
-    const {shouldShowForm} = this.state;
-    if (shouldShowForm) {
-      return (
-        <View>
-          <TextInput
-            style={{
-              height: 50,
-              borderColor: 'black',
-              borderWidth: 1,
-              margin: 10,
-              fontSize: 20,
-              paddingHorizontal: 20,
-            }}
-            placeholder="English"
-            value={this.state.txtEn}
-            onChangeText={text => {
-              this.setState({txtEn: text});
-            }}
-          />
-          <TextInput
-            style={{
-              height: 50,
-              borderColor: 'black',
-              borderWidth: 1,
-              margin: 10,
-              fontSize: 20,
-              paddingHorizontal: 20,
-            }}
-            placeholder="Vietnamese"
-            value={this.state.txtVn}
-            onChangeText={text => {
-              this.setState({txtVn: text});
-            }}
-          />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              marginTop: 20,
-            }}>
-            <TouchableOpacity
-              onPress={() => this.addWord()}
-              style={{
-                backgroundColor: '#28a745',
-                padding: 15,
-                borderRadius: 8,
-              }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-                Add word
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.toggleForm()}
-              style={{
-                backgroundColor: 'red',
-                padding: 15,
-                borderRadius: 8,
-              }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
-                Cancel
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={() => this.toggleForm()}
-          style={{
-            paddingVertical: width / 30,
-            backgroundColor: '#28a745',
-            alignItems: 'center',
-            borderRadius: width / 100,
-          }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: width / 15,
-            }}>
-            +
-          </Text>
-        </TouchableOpacity>
-      );
-    }
-  }
+  
   toggleMemorized = id => {
     const words = this.state.words.map(word => {
       if (word.id === id) {
@@ -178,7 +90,7 @@ export default class List extends Component {
         showsVerticalScrollIndicator={false}
         style={{flex: 1}}>
         <View style={{flex: 1, paddingTop: width / 50}}>
-          {this.renderForm()}
+          <Form shouldShowForm={this.state.shouldShowForm} />
           <Filter optionSelected={this.state.optionSelected} />
           <Word
             words={this.state.words}
