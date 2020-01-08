@@ -29,6 +29,8 @@ export default class List extends Component {
       shouldShowForm: false,
       optionSelected: 'SHOW_ALL',
     };
+    this.onRemoveWord = this.onRemoveWord.bind(this);
+    this.toggleMemorized = this.toggleMemorized.bind(this);
   }
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
@@ -52,7 +54,6 @@ export default class List extends Component {
       shouldShowForm: !this.state.shouldShowForm,
     });
   };
-  
   toggleMemorized = id => {
     const words = this.state.words.map(word => {
       if (word.id === id) {
@@ -62,7 +63,7 @@ export default class List extends Component {
     });
     this.setState({words});
   };
-  removeWord = id => {
+  onRemoveWord = id => {
     Alert.alert(
       'Do you want to remove this word ?',
       'Choose yes or no',
@@ -93,6 +94,8 @@ export default class List extends Component {
           <Form shouldShowForm={this.state.shouldShowForm} />
           <Filter optionSelected={this.state.optionSelected} />
           <Word
+            toggleMemorized={this.toggleMemorized}
+            onRemoveWord={this.onRemoveWord}
             words={this.state.words}
             optionSelected={this.state.optionSelected}
           />

@@ -39,6 +39,7 @@ export default class Word extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
+            onPress={() => this.props.toggleMemorized(id)}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
@@ -49,6 +50,7 @@ export default class Word extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => this.props.onRemoveWord(id)}
             style={{
               backgroundColor: '#e0a800',
               paddingHorizontal: width / 15,
