@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {width, height} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import WordModel from './model/WordModel';
+
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
@@ -27,34 +27,26 @@ export default class List extends Component {
         {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
       ],
       shouldShowForm: false,
-      optionSelected: 'SHOW_ALL',
+      filterMode: 'SHOW_ALL',
     };
     this.onRemoveWord = this.onRemoveWord.bind(this);
-    this.toggleMemorized = this.toggleMemorized.bind(this);
+    this.onToggleMemorized = this.onToggleMemorized.bind(this);
+    this.onFilterMode = this.onFilterMode.bind(this);
+    this.onToggleForm = this.onToggleForm.bind(this);
+    this.onAddWord = this.onAddWord.bind(this);
   }
-  toggleForm = () => {
+  onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
-  addWord = () => {
-    const {txtEn, txtVn} = this.state;
-    if (txtEn.length <= 0 || txtVn.length <= 0) {
-      return alert('Ban chua nhap du thong tin');
-    }
-    const newWord = new WordModel(
-      this.state.words[this.state.words.length - 1].id + 1,
-      txtEn,
-      txtVn,
-    );
+  onAddWord = newWord => {
     const newListWord = this.state.words.concat(newWord);
     newListWord.sort((a, b) => a.name > b.name);
     this.setState({
       words: newListWord,
-      txtEn: '',
-      txtVn: '',
       shouldShowForm: !this.state.shouldShowForm,
     });
   };
-  toggleMemorized = id => {
+  onToggleMemorized = id => {
     const words = this.state.words.map(word => {
       if (word.id === id) {
         return {...word, isMemorized: !word.isMemorized};
@@ -85,19 +77,30 @@ export default class List extends Component {
       {cancelable: false},
     );
   };
+  onFilterMode = filterMode => {
+    this.setState({filterMode});
+  };
   render() {
     return (
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{flex: 1}}>
         <View style={{flex: 1, paddingTop: width / 50}}>
-          <Form shouldShowForm={this.state.shouldShowForm} />
-          <Filter optionSelected={this.state.optionSelected} />
+          <Form
+            currentId={this.state.words.length}
+            onAddWord={this.onAddWord}
+            onToggleForm={this.onToggleForm}
+            shouldShowForm={this.state.shouldShowForm}
+          />
+          <Filter
+            onFilterMode={this.onFilterMode}
+            filterMode={this.state.filterMode}
+          />
           <Word
-            toggleMemorized={this.toggleMemorized}
+            onToggleMemorized={this.onToggleMemorized}
             onRemoveWord={this.onRemoveWord}
             words={this.state.words}
-            optionSelected={this.state.optionSelected}
+            filterMode={this.state.filterMode}
           />
         </View>
       </KeyboardAwareScrollView>

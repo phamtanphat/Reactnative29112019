@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {width, height} from './dimension';
+import WordModel from './model/WordModel';
 
 export default class Form extends Component {
   constructor(props) {
@@ -10,7 +11,21 @@ export default class Form extends Component {
       txtEn: '',
       txtVn: '',
     };
+    this.addWord = this.addWord.bind(this);
   }
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length <= 0 || txtVn.length <= 0) {
+      return alert('Ban chua nhap du thong tin');
+    }
+    const newWord = new WordModel(this.props.currentId + 1, txtEn, txtVn);
+    this.props.onAddWord(newWord);
+    this.setState({
+      txtEn: '',
+      txtVn: '',
+    });
+  };
+
   renderForm = () => {
     const {shouldShowForm} = this.props;
     if (shouldShowForm) {
@@ -53,6 +68,7 @@ export default class Form extends Component {
               marginTop: 20,
             }}>
             <TouchableOpacity
+              onPress={this.addWord}
               style={{
                 backgroundColor: '#28a745',
                 padding: 15,
@@ -63,6 +79,7 @@ export default class Form extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={this.props.onToggleForm}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -78,6 +95,7 @@ export default class Form extends Component {
     } else {
       return (
         <TouchableOpacity
+          onPress={this.props.onToggleForm}
           style={{
             paddingVertical: width / 30,
             backgroundColor: '#28a745',

@@ -6,11 +6,11 @@ import {width, height} from './dimension';
 export default class Word extends Component {
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
-    const {optionSelected} = this.props;
-    if (optionSelected === 'SHOW_FORGOT' && !item.isMemorized) {
+    const {filterMode} = this.props;
+    if (filterMode === 'SHOW_FORGOT' && !item.isMemorized) {
       return null;
     }
-    if (optionSelected === 'SHOW_MEMORIZED' && item.isMemorized) {
+    if (filterMode === 'SHOW_MEMORIZED' && item.isMemorized) {
       return null;
     }
     return (
@@ -39,7 +39,7 @@ export default class Word extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
-            onPress={() => this.props.toggleMemorized(id)}
+            onPress={() => this.props.onToggleMemorized(id)}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,

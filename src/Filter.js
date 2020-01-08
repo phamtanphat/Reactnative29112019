@@ -29,7 +29,8 @@ export default class Filter extends Component {
         }}
         inputContainerStyle={{borderBottomColor: 'transparent'}}
         dropdownOffset={{top: width * 0.01, left: 0}}
-        value={this.props.optionSelected}
+        value={this.props.filterMode}
+        onChangeText={this.props.onFilterMode}
       />
     );
   }
