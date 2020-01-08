@@ -1,11 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 import {width, height} from './dimension';
 
 export default class Word extends Component {
-  render() {
-    const {en, vn, isMemorized} = this.props.word;
+  renderItemView = item => {
+    const {en, id, vn, isMemorized} = item;
+    const {optionSelected} = this.props;
+    if (optionSelected === 'SHOW_FORGOT' && !item.isMemorized) {
+      return null;
+    }
+    if (optionSelected === 'SHOW_MEMORIZED' && item.isMemorized) {
+      return null;
+    }
     return (
       <View
         style={{
@@ -51,6 +58,21 @@ export default class Word extends Component {
           </TouchableOpacity>
         </View>
       </View>
+    );
+  };
+  render() {
+    return (
+      <FlatList
+        ref={ref => {
+          this.flatList = ref;
+        }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{marginTop: width / 50}}
+        data={this.props.words}
+        extraData={this.props.words}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index}) => this.renderItemView(item)}
+      />
     );
   }
 }
