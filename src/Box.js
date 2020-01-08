@@ -4,9 +4,24 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import Child from './Child';
 
 export default class Box extends Component {
-  //   state = {
-  //     count: 0,
-  //   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 1,
+    };
+    this.onIncrease = this.onIncrease.bind(this);
+    this.onDecrease = this.onDecrease.bind(this);
+    this.onReset = this.onReset.bind(this);
+  }
+  onIncrease = () => {
+    this.setState({count: this.state.count + 1});
+  };
+  onDecrease = () => {
+    this.setState({count: this.state.count - 1});
+  };
+  onReset = () => {
+    this.setState({count: 0});
+  };
   render() {
     return (
       <View
@@ -19,11 +34,11 @@ export default class Box extends Component {
         <Text style={{fontSize: 30, color: 'red'}}>
           Value = {this.state.count}
         </Text>
-        {/* <TouchableOpacity
-          onPress={() => this.setState({count: this.state.count + 1})}>
-          <Text>Plus</Text>
-        </TouchableOpacity> */}
-        <Child />
+        <Child
+          onIncrease={this.onIncrease}
+          onDecrease={this.onDecrease}
+          onReset={this.onReset}
+        />
       </View>
     );
   }
