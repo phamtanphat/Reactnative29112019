@@ -22,7 +22,7 @@ const defWords = [
 const defstore = {
   words: defWords,
   shouldShowForm: false,
-  filterMode: 'SHOW_FORGOT',
+  filterMode: 'SHOW_ALL',
 };
 
 const store = createStore((state = defstore, action) => {

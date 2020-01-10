@@ -2,8 +2,9 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 import {width, height} from './dimension';
+import {connect} from 'react-redux';
 
-export default class Word extends Component {
+class Word extends Component {
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
     const {filterMode} = this.props;
@@ -78,3 +79,8 @@ export default class Word extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {words: state.words, filterMode: state.filterMode};
+};
+
+export default connect(mapStateToProps)(Word);
