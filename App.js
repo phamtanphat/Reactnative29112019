@@ -8,6 +8,18 @@ import MyState from './src/MyState';
 import List from './src/List';
 import Mymodal from './src/Mymodal';
 import Box from './src/Box';
+import {createStore} from 'redux';
+
+const store = createStore((state = 0, action) => {
+  if (action.type === 'INCREASE') {
+    return state + 1;
+  }
+  return state;
+});
+
+console.log(store.getState());
+store.dispatch({type: 'INCREASE'});
+console.log(store.getState());
 
 class App extends Component {
   render() {
