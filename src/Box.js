@@ -28,5 +28,5 @@ const mapStateToPops = state => {
 };
 
 export default connect(mapStateToPops)(Box);
-// export default connect(state => { return {state: state} })(Box); 
+// export default connect(state => { return {state: state} })(Box);
 // export default connect(state => ({state: state}))(Box);
