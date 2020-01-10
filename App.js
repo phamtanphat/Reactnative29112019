@@ -21,7 +21,7 @@ const defWords = [
 
 const defstore = {
   words: defWords,
-  shouldShowForm: false,
+  shouldShowForm: true,
   filterMode: 'SHOW_ALL',
 };
 
@@ -37,12 +37,12 @@ class App extends Component {
           {/* {words.map(item => {
             return <Word word={item} key={item.id} />;
           })} */}
-          <List />
           {/* <MyFlatlist /> */}
           {/* <List /> */}
+          {/* <Box/> */}
           {/* <Mymodal /> */}
           <Provider store={store}>
-            <Box />
+            <List />
           </Provider>
         </View>
       </SafeAreaView>

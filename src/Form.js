@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {width, height} from './dimension';
 import WordModel from './model/WordModel';
+import {connect} from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -117,3 +118,8 @@ export default class Form extends Component {
     return this.renderForm();
   }
 }
+const mapStateToProps = state => {
+  return {shouldShowForm: state.shouldShowForm};
+};
+
+export default connect(mapStateToProps)(Form);

@@ -10,21 +10,12 @@ import {
 } from 'react-native';
 import {width, height} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
 import Word from './Word';
 import Filter from './Filter';
 import Form from './Form';
+import {connect} from 'react-redux';
 
-export default class List extends Component {
-  constructor(props) {
-    super(props);
-   
-    this.onRemoveWord = this.onRemoveWord.bind(this);
-    this.onToggleMemorized = this.onToggleMemorized.bind(this);
-    this.onFilterMode = this.onFilterMode.bind(this);
-    this.onToggleForm = this.onToggleForm.bind(this);
-    this.onAddWord = this.onAddWord.bind(this);
-  }
+class List extends Component {
   onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
@@ -76,24 +67,13 @@ export default class List extends Component {
         showsVerticalScrollIndicator={false}
         style={{flex: 1}}>
         <View style={{flex: 1, paddingTop: width / 50}}>
-          <Form
-            currentId={this.state.words.length}
-            onAddWord={this.onAddWord}
-            onToggleForm={this.onToggleForm}
-            shouldShowForm={this.state.shouldShowForm}
-          />
-          <Filter
-            onFilterMode={this.onFilterMode}
-            filterMode={this.state.filterMode}
-          />
-          <Word
-            onToggleMemorized={this.onToggleMemorized}
-            onRemoveWord={this.onRemoveWord}
-            words={this.state.words}
-            filterMode={this.state.filterMode}
-          />
+          <Form />
+          <Filter />
+          <Word />
         </View>
       </KeyboardAwareScrollView>
     );
   }
 }
+
+export default connect()(List);
