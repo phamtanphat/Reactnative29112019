@@ -9,6 +9,7 @@ import List from './src/List';
 import Mymodal from './src/Mymodal';
 import Box from './src/Box';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
 const store = createStore((state = 0, action) => {
   if (action.type === 'INCREASE') {
@@ -16,10 +17,6 @@ const store = createStore((state = 0, action) => {
   }
   return state;
 });
-
-console.log(store.getState());
-store.dispatch({type: 'INCREASE'});
-console.log(store.getState());
 
 class App extends Component {
   render() {
@@ -31,9 +28,11 @@ class App extends Component {
           })} */}
           {/* <List />
           <MyFlatlist /> */}
-          <List />
+          {/* <List /> */}
           {/* <Mymodal /> */}
-          {/* <Box /> */}
+          <Provider store={store}>
+            <Box />
+          </Provider>
         </View>
       </SafeAreaView>
     );
