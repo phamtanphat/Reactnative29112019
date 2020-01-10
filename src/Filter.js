@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import {width, height} from './dimension';
 import {Dropdown} from 'react-native-material-dropdown';
+import {connect} from 'react-redux';
 
-export default class Filter extends Component {
+class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,3 +36,9 @@ export default class Filter extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {filterMode: state.filterMode};
+};
+
+export default connect(mapStateToProps)(Filter);
