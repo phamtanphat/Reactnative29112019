@@ -26,6 +26,9 @@ const defstore = {
 };
 
 const store = createStore((state = defstore, action) => {
+  if (action.type === 'TOGGLE_FORM') {
+    return {...state, shouldShowForm: !state.shouldShowForm};
+  }
   return state;
 });
 
