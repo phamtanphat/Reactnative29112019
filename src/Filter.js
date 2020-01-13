@@ -31,7 +31,9 @@ class Filter extends Component {
         inputContainerStyle={{borderBottomColor: 'transparent'}}
         dropdownOffset={{top: width * 0.01, left: 0}}
         value={this.props.filterMode}
-        onChangeText={this.props.onFilterMode}
+        onChangeText={text =>
+          this.props.dispatch({type: 'SET_FILTER_MODE', filterMode: text})
+        }
       />
     );
   }

@@ -1,10 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity, FlatList} from 'react-native';
+import {Text, View, TouchableOpacity, FlatList, Alert} from 'react-native';
 import {width, height} from './dimension';
 import {connect} from 'react-redux';
 
 class Word extends Component {
+  onRemoveWord = id => {
+    Alert.alert(
+      'Do you want to remove this word ?',
+      'Choose yes or no',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            this.props.dispatch({type: 'REMOVE_WORD', id});
+          },
+        },
+        {text: 'No', style: 'cancel'},
+      ],
+      {cancelable: false},
+    );
+  };
   renderItemView = item => {
     const {en, id, vn, isMemorized} = item;
     const {filterMode} = this.props;
@@ -40,7 +56,7 @@ class Word extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
-            onPress={() => this.props.onToggleMemorized(id)}
+            onPress={() => this.props.dispatch({type: 'TOGGLE_MEMORIZED', id})}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
@@ -51,7 +67,7 @@ class Word extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.onRemoveWord(id)}
+            onPress={() => this.onRemoveWord(id)}
             style={{
               backgroundColor: '#e0a800',
               paddingHorizontal: width / 15,
