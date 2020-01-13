@@ -19,14 +19,6 @@ class List extends Component {
   onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
-  onAddWord = newWord => {
-    const newListWord = this.state.words.concat(newWord);
-    newListWord.sort((a, b) => a.name > b.name);
-    this.setState({
-      words: newListWord,
-      shouldShowForm: !this.state.shouldShowForm,
-    });
-  };
   onToggleMemorized = id => {
     const words = this.state.words.map(word => {
       if (word.id === id) {

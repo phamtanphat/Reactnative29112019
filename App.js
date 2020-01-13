@@ -29,6 +29,15 @@ const store = createStore((state = defstore, action) => {
   if (action.type === 'TOGGLE_FORM') {
     return {...state, shouldShowForm: !state.shouldShowForm};
   }
+  if (action.type === 'ADD_WORD') {
+    const newListWord = state.words.concat(action.newWord);
+    newListWord.sort((a, b) => a.name > b.name);
+    return {
+      ...state,
+      shouldShowForm: !state.shouldShowForm,
+      words: newListWord,
+    };
+  }
   return state;
 });
 

@@ -20,7 +20,7 @@ class Form extends Component {
       return alert('Ban chua nhap du thong tin');
     }
     const newWord = new WordModel(this.props.currentId + 1, txtEn, txtVn);
-    this.props.onAddWord(newWord);
+    this.props.dispatch({type: 'ADD_WORD', newWord});
     this.setState({
       txtEn: '',
       txtVn: '',
