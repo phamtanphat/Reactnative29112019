@@ -29,12 +29,35 @@ function wordReducer(state = defWords, action) {
     });
     return words;
   }
+  if (action.type === 'ADD_WORD') {
+    const newListWord = state.concat(action.newWord);
+    newListWord.sort((a, b) => a.name > b.name);
+    return newListWord;
+  }
+  if (action.type === 'REMOVE_WORD') {
+    const words = state.filter(word => {
+      if (word.id === action.id) {
+        return false;
+      }
+      return true;
+    });
+    return words;
+  }
   return state;
 }
 function filterModeReducer(state = 'SHOW_ALL', action) {
+  if (action.type === 'SET_FILTER_MODE') {
+    return action.filterMode;
+  }
   return state;
 }
 function shouldShowFormReducer(state = false, action) {
+  if (action.type === 'TOGGLE_FORM') {
+    return !state;
+  }
+  if (action.type === 'ADD_WORD') {
+    return !state;
+  }
   return state;
 }
 
@@ -51,13 +74,6 @@ class App extends Component {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={{flex: 1, marginHorizontal: width / 20}}>
-          {/* {words.map(item => {
-            return <Word word={item} key={item.id} />;
-          })} */}
-          {/* <MyFlatlist /> */}
-          {/* <List /> */}
-          {/* <Box/> */}
-          {/* <Mymodal /> */}
           <Provider store={store}>
             <List />
           </Provider>
@@ -68,41 +84,3 @@ class App extends Component {
 }
 
 export default App;
-
-// const store = createStore((state = defstore, action) => {
-//   if (action.type === 'TOGGLE_FORM') {
-//     return {...state, shouldShowForm: !state.shouldShowForm};
-//   }
-//   if (action.type === 'ADD_WORD') {
-//     const newListWord = state.words.concat(action.newWord);
-//     newListWord.sort((a, b) => a.name > b.name);
-//     return {
-//       ...state,
-//       shouldShowForm: !state.shouldShowForm,
-//       words: newListWord,
-//     };
-//   }
-//   if (action.type === 'TOGGLE_MEMORIZED') {
-//     const words = state.words.map(word => {
-//       if (word.id === action.id) {
-//         return {...word, isMemorized: !word.isMemorized};
-//       }
-//       return word;
-//     });
-//     return {...state, words};
-//   }
-//   if (action.type === 'REMOVE_WORD') {
-//     const words = state.words.filter(word => {
-//       if (word.id === action.id) {
-//         return false;
-//       }
-//       return true;
-//     });
-//     return {...state, words};
-//   }
-//   if (action.type === 'SET_FILTER_MODE') {
-//     return {...state, filterMode: action.filterMode};
-//   }
-//   return state;
-// });
-
