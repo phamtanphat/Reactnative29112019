@@ -20,12 +20,21 @@ const defWords = [
 ];
 
 function wordReducer(state = defWords, action) {
+  if (action.type === 'TOGGLE_MEMORIZED') {
+    const words = state.map(word => {
+      if (word.id === action.id) {
+        return {...word, isMemorized: !word.isMemorized};
+      }
+      return word;
+    });
+    return words;
+  }
   return state;
 }
 function filterModeReducer(state = 'SHOW_ALL', action) {
   return state;
 }
-function shouldShowFormReducer(state = true, action) {
+function shouldShowFormReducer(state = false, action) {
   return state;
 }
 
@@ -96,3 +105,4 @@ export default App;
 //   }
 //   return state;
 // });
+
