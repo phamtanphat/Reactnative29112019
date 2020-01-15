@@ -32,4 +32,3 @@ export default function wordReducer(state = defWords, action) {
   }
   return state;
 }
-

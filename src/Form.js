@@ -4,6 +4,7 @@ import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {width, height} from './dimension';
 import WordModel from './model/WordModel';
 import {connect} from 'react-redux';
+import * as actionCreator from './redux/action/actionCreator';
 
 class Form extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Form extends Component {
       return alert('Ban chua nhap du thong tin');
     }
     const newWord = new WordModel(this.props.currentId + 1, txtEn, txtVn);
-    this.props.dispatch({type: 'ADD_WORD', newWord});
+    this.props.addWord(newWord);
     this.setState({
       txtEn: '',
       txtVn: '',
@@ -80,9 +81,7 @@ class Form extends Component {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {
-                this.props.dispatch({type: 'TOGGLE_FORM'});
-              }}
+              onPress={this.props.toggleForm}
               style={{
                 backgroundColor: 'red',
                 padding: 15,
@@ -98,9 +97,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={() => {
-            this.props.dispatch({type: 'TOGGLE_FORM'});
-          }}
+          onPress={this.props.toggleForm}
           style={{
             paddingVertical: width / 30,
             backgroundColor: '#28a745',
@@ -125,5 +122,14 @@ class Form extends Component {
 const mapStateToProps = state => {
   return {shouldShowForm: state.shouldShowForm};
 };
+const mapDispatchToProps = disptach => {
+  return {
+    addWord: newWord => disptach(actionCreator.addWord(newWord)),
+    toggleForm: () => disptach(actionCreator.toggleForm()),
+  };
+};
 
-export default connect(mapStateToProps)(Form);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Form);

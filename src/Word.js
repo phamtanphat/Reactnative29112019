@@ -14,7 +14,7 @@ class Word extends Component {
         {
           text: 'Yes',
           onPress: () => {
-            this.props.dispatch({type: 'REMOVE_WORD', id});
+            this.props.removeWord(id);
           },
         },
         {text: 'No', style: 'cancel'},
@@ -102,6 +102,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = disptach => {
   return {
     toggleWord: id => disptach(actionCreator.toggleMemorized(id)),
+    removeWord: id => disptach(actionCreator.removeWord(id)),
   };
 };
 export default connect(
