@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, FlatList, Alert} from 'react-native';
 import {width, height} from './dimension';
 import {connect} from 'react-redux';
-import {toggleMemorized} from './redux/action/actionCreator';
+import * as actionCreator from './redux/action/actionCreator';
 
 class Word extends Component {
   onRemoveWord = id => {
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = disptach => {
   return {
-    toggleWord: id => disptach(toggleMemorized(id)),
+    toggleWord: id => disptach(actionCreator.toggleMemorized(id)),
   };
 };
 export default connect(
