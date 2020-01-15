@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, FlatList, Alert} from 'react-native';
 import {width, height} from './dimension';
 import {connect} from 'react-redux';
+import {toggleMemorized} from './redux/action/actionCreator';
 
 class Word extends Component {
   onRemoveWord = id => {
@@ -56,7 +57,7 @@ class Word extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
-            onPress={() => this.props.dispatch({type: 'TOGGLE_MEMORIZED', id})}
+            onPress={() => this.props.toggleWord(id)}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
@@ -98,5 +99,12 @@ class Word extends Component {
 const mapStateToProps = state => {
   return {words: state.words, filterMode: state.filterMode};
 };
-
-export default connect(mapStateToProps)(Word);
+const mapDispatchToProps = disptach => {
+  return {
+    toggleWord: id => disptach(toggleMemorized(id)),
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Word);
