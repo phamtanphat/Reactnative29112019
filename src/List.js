@@ -3,11 +3,11 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import {width} from './dimension';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import Word from './Word';
 
-import Form from './Form';
 import {connect} from 'react-redux';
 import FilterController from './Controller/FilterControl';
+import FormController from './Controller/FormController';
+import WordController from './Controller/WordController';
 
 class List extends Component {
   render() {
@@ -16,9 +16,9 @@ class List extends Component {
         showsVerticalScrollIndicator={false}
         style={{flex: 1}}>
         <View style={{flex: 1, paddingTop: width / 50}}>
-          <Form />
+          <FormController />
           <FilterController />
-          <Word />
+          <WordController />
         </View>
       </KeyboardAwareScrollView>
     );

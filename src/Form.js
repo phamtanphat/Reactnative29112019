@@ -3,10 +3,8 @@ import React, {Component} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {width, height} from './dimension';
 import WordModel from './model/WordModel';
-import {connect} from 'react-redux';
-import * as actionCreator from './redux/action/actionCreator';
 
-class Form extends Component {
+export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,17 +117,3 @@ class Form extends Component {
     return this.renderForm();
   }
 }
-const mapStateToProps = state => {
-  return {shouldShowForm: state.shouldShowForm};
-};
-const mapDispatchToProps = disptach => {
-  return {
-    addWord: newWord => disptach(actionCreator.addWord(newWord)),
-    toggleForm: () => disptach(actionCreator.toggleForm()),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Form);

@@ -2,10 +2,8 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, FlatList, Alert} from 'react-native';
 import {width, height} from './dimension';
-import {connect} from 'react-redux';
-import * as actionCreator from './redux/action/actionCreator';
 
-class Word extends Component {
+export default class Word extends Component {
   onRemoveWord = id => {
     Alert.alert(
       'Do you want to remove this word ?',
@@ -96,16 +94,3 @@ class Word extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {words: state.words, filterMode: state.filterMode};
-};
-const mapDispatchToProps = disptach => {
-  return {
-    toggleWord: id => disptach(actionCreator.toggleMemorized(id)),
-    removeWord: id => disptach(actionCreator.removeWord(id)),
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Word);

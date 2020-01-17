@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = disptach => {
   return {
     setFilterMode: filterMode => {
-      disptach(actionCreator.setFilterMode(filterMode))
+      disptach(actionCreator.setFilterMode(filterMode));
     },
   };
 };

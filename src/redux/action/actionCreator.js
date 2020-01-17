@@ -11,6 +11,10 @@ export function addWord(newWord) {
 export function toggleForm() {
   return {type: actionType.TOGGLE_FORM};
 }
+
+export function removeWord(id) {
+  return {type: actionType.REMOVE_WORD, id};
+}
 export function setFilterMode(filterMode) {
   return {type: actionType.SET_FILTER_MODE, filterMode};
 }
