@@ -4,10 +4,6 @@ export function toggleMemorized(id) {
   return {type: actionType.TOGGLE_MEMORIZED, id};
 }
 
-export function addWord(newWord) {
-  return {type: actionType.ADD_WORD, newWord};
-}
-
 export function toggleForm() {
   return {type: actionType.TOGGLE_FORM};
 }
@@ -32,5 +28,20 @@ export function fetchWordsApi() {
       .then(data =>
         dispatch({type: actionType.FETCH_WORDS_API, words: data.words}),
       );
+  };
+}
+
+export function addWord(en, vn) {
+  return dispatch => {
+    fetch('https://server2301.herokuapp.com/word', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({en, vn}),
+    })
+      .then(response => response.json())
+      .then(data => dispatch({type: actionType.ADD_WORD, newWord: data.word}));
   };
 }

@@ -7,7 +7,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = disptach => {
   return {
-    addWord: newWord => disptach(actionCreator.addWord(newWord)),
+    addWord: (en, vn) => disptach(actionCreator.addWord(en, vn)),
     toggleForm: () => disptach(actionCreator.toggleForm()),
   };
 };

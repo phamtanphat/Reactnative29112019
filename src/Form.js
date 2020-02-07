@@ -18,8 +18,7 @@ export default class Form extends Component {
     if (txtEn.length <= 0 || txtVn.length <= 0) {
       return alert('Ban chua nhap du thong tin');
     }
-    const newWord = new WordModel(this.props.currentId + 1, txtEn, txtVn);
-    this.props.addWord(newWord);
+    this.props.addWord(txtEn, txtVn);
     this.setState({
       txtEn: '',
       txtVn: '',
