@@ -1,12 +1,4 @@
-const defWords = [
-  {id: 1, en: 'One', vn: 'Mot', isMemorized: true},
-  {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-  {id: 3, en: 'Three', vn: 'Ba', isMemorized: false},
-  {id: 4, en: 'Four', vn: 'Bon', isMemorized: true},
-  {id: 5, en: 'Five', vn: 'Nam', isMemorized: true},
-];
-
-export default function wordReducer(state = defWords, action) {
+export default function wordReducer(state = [], action) {
   if (action.type === 'TOGGLE_MEMORIZED') {
     const words = state.map(word => {
       if (word.id === action.id) {
@@ -29,6 +21,9 @@ export default function wordReducer(state = defWords, action) {
       return true;
     });
     return words;
+  }
+  if (action.type === 'FETCH_WORDS_API') {
+    return action.words;
   }
   return state;
 }

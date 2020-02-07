@@ -9,6 +9,7 @@ const mapDispatchToProps = disptach => {
   return {
     toggleWord: id => disptach(actionCreator.toggleMemorized(id)),
     removeWord: id => disptach(actionCreator.removeWord(id)),
+    fetchWordsApi: () => disptach(actionCreator.fetchWordsApi()),
   };
 };
 export default connect(

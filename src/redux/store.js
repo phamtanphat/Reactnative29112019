@@ -1,5 +1,6 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import wordReducer from './reducers/wordReducer';
+import thunk from 'redux-thunk';
 import filterModeReducer from './reducers/filterModeReducer';
 import shouldShowFormReducer from './reducers/shouldShowFormReducer';
 
@@ -9,9 +10,6 @@ const rootReducer = combineReducers({
   shouldShowForm: shouldShowFormReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
