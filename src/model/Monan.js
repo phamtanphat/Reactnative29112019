@@ -1,6 +1,6 @@
 export default class Monan {
-  constructor(id, name, description, price, image) {
-    this.id = id;
+  constructor(_id, name, description, price, image) {
+    this._id = _id;
     this.name = name;
     this.description = description;
     this.price = price;

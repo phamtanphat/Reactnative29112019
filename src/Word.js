@@ -7,7 +7,7 @@ export default class Word extends Component {
   componentDidMount() {
     this.props.fetchWordsApi();
   }
-  onRemoveWord = id => {
+  onRemoveWord = _id => {
     Alert.alert(
       'Do you want to remove this word ?',
       'Choose yes or no',
@@ -15,7 +15,7 @@ export default class Word extends Component {
         {
           text: 'Yes',
           onPress: () => {
-            this.props.removeWord(id);
+            this.props.removeWord(_id);
           },
         },
         {text: 'No', style: 'cancel'},
@@ -24,7 +24,7 @@ export default class Word extends Component {
     );
   };
   renderItemView = item => {
-    const {en, id, vn, isMemorized} = item;
+    const {en, _id, vn, isMemorized} = item;
     const {filterMode} = this.props;
     if (filterMode === 'SHOW_FORGOT' && !item.isMemorized) {
       return null;
@@ -58,7 +58,7 @@ export default class Word extends Component {
             marginBottom: width / 30,
           }}>
           <TouchableOpacity
-            onPress={() => this.props.toggleWord(id)}
+            onPress={() => this.props.toggleWord(_id, !isMemorized)}
             style={{
               backgroundColor: isMemorized ? '#208837' : '#C82233',
               paddingHorizontal: width / 15,
@@ -69,7 +69,7 @@ export default class Word extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.onRemoveWord(id)}
+            onPress={() => this.onRemoveWord(_id)}
             style={{
               backgroundColor: '#e0a800',
               paddingHorizontal: width / 15,

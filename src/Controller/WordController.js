@@ -7,8 +7,10 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = disptach => {
   return {
-    toggleWord: id => disptach(actionCreator.toggleMemorized(id)),
-    removeWord: id => disptach(actionCreator.removeWord(id)),
+    toggleWord: (_id, isMemorized) => {
+      disptach(actionCreator.toggleMemorized(_id, isMemorized));
+    },
+    removeWord: _id => disptach(actionCreator.removeWord(_id)),
     fetchWordsApi: () => disptach(actionCreator.fetchWordsApi()),
   };
 };
